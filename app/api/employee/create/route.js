@@ -3,9 +3,15 @@ import bcrypt from "bcrypt";
 import mongoose from "mongoose";
 import { flushEmployeeCache } from "../../../libs/cache.js";
 import User from "../../../models/user.model.js";
-import fs from "fs";
-import path from "path";
 import { verifyAdmin } from "../../../libs/verifyAdmin.js";
+import { v2 as cloudinary } from "cloudinary";
+
+// Cloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export const POST = verifyAdmin(async (req) => {
   const session = await mongoose.startSession();
@@ -25,23 +31,30 @@ export const POST = verifyAdmin(async (req) => {
 
     if (file && file.size > 0) {
       const buffer = Buffer.from(await file.arrayBuffer());
-      const uploadDir = path.join(process.cwd(), "public/uploads");
 
-      if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
+      // Upload to Cloudinary
+      const result = await new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          { folder: "employees" },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          }
+        );
+        stream.end(buffer);
+      });
 
-      const uniqueName = `${Date.now()}-${file.name}`;
-      const filePath = path.join(uploadDir, uniqueName);
-      fs.writeFileSync(filePath, buffer);
-
-      profileImage = `/uploads/${uniqueName}`; // public path
+      profileImage = result.secure_url; // URL store in DB
     }
 
+    // Check if email exists
     const exists = await User.findOne({ email }).session(session);
     if (exists) {
       await session.abortTransaction();
       return NextResponse.json({ message: "Email already exists" }, { status: 400 });
     }
 
+    // Hash password and create user
     const hashPassword = await bcrypt.hash(password, 10);
     await User.create(
       [{ name, email, password: hashPassword, role, profileImage, departments, salary }],
@@ -50,10 +63,13 @@ export const POST = verifyAdmin(async (req) => {
 
     await session.commitTransaction();
     flushEmployeeCache();
+
     return NextResponse.json({ message: "Employee created successfully" });
   } catch (e) {
     console.error("Error in /api/employee/create:", e);
     await session.abortTransaction();
     return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
-}
+  } finally {
+    session.endSession();
+  }
 });
