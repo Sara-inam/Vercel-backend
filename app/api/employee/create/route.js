@@ -52,9 +52,8 @@ export const POST = verifyAdmin(async (req) => {
     flushEmployeeCache();
     return NextResponse.json({ message: "Employee created successfully" });
   } catch (e) {
+    console.error("Error in /api/employee/create:", e);
     await session.abortTransaction();
     return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
-  } finally {
-    session.endSession();
-  }
+}
 });
