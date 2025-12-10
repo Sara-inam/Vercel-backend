@@ -23,9 +23,13 @@ export const POST = verifyAdmin(async (req) => {
     const email = formData.get("email");
     const password = formData.get("password");
     const role = formData.get("role") || "employee";
-    const salary = Number(formData.get("salary"));
     const departments = formData.getAll("departments[]");
 
+    // ✅ Safe salary conversion
+    const salaryInput = formData.get("salary");
+    const salary = salaryInput && !isNaN(Number(salaryInput)) ? Number(salaryInput) : 0;
+
+    // ✅ Optional profile image upload
     let profileImage = null;
     const file = formData.get("profileImage");
 
@@ -47,14 +51,14 @@ export const POST = verifyAdmin(async (req) => {
       profileImage = result.secure_url; // URL store in DB
     }
 
-    // Check if email exists
+    // ✅ Check if email exists
     const exists = await User.findOne({ email }).session(session);
     if (exists) {
       await session.abortTransaction();
       return NextResponse.json({ message: "Email already exists" }, { status: 400 });
     }
 
-    // Hash password and create user
+    // ✅ Hash password and create user
     const hashPassword = await bcrypt.hash(password, 10);
     await User.create(
       [{ name, email, password: hashPassword, role, profileImage, departments, salary }],
