@@ -10,8 +10,8 @@ export const GET = verifyAdmin(async (req) => {
     role: "employee",
     isDeleted: false,
     $or: [
-      { email: { $regex: query, $options: "i" } },
-      { name: { $regex: query, $options: "i" } }
+      { email: { $regex: `^${query}`, $options: "i" } },
+      { name: { $regex: `^${query}`, $options: "i" } }
     ]
   }).select("_id name email");
 
