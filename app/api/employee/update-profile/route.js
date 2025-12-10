@@ -1,85 +1,62 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+import { v2 as cloudinary } from "cloudinary";
 import User from "../../../models/user.model.js";
 import { verifyToken } from "../../../libs/verifyToken.js";
-import mongoose from "mongoose";
-import { flushProfileCache } from "../../../libs/cache.js";
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
 
-// PUT Employee Profile
 export const PUT = verifyToken(async (req, ctx, user) => {
-  const session = await mongoose.startSession();
-  session.startTransaction();
-
   try {
-    const userId = user._id.toString();
-
-    // Parse multipart form-data
     const formData = await req.formData();
     const name = formData.get("name");
-    const profileImageFile = formData.get("profileImage");
+    const newImage = formData.get("profileImage");
 
-    const employee = await User.findById(userId).session(session);
+    const userId = user._id;
+    const employee = await User.findById(userId);
+
     if (!employee) {
-      await session.abortTransaction();
-      session.endSession();
-      return NextResponse.json({ message: "Employee not found" }, { status: 404 });
+      return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
-    let updateData = {};
+    let updateFields = {};
+    if (name) updateFields.name = name;
 
-    // Update name
-    if (name) updateData.name = name;
+    // DELETE OLD IMAGE
+    if (employee.profilePublicId) {
+      await cloudinary.uploader.destroy(employee.profilePublicId);
+    }
 
-    // Update profile image
-    if (profileImageFile && profileImageFile.size > 0) {
-      const arrayBuffer = await profileImageFile.arrayBuffer();
+    // UPLOAD NEW IMAGE
+    if (newImage && newImage.size > 0) {
+      const arrayBuffer = await newImage.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
 
-      const fileName = `${Date.now()}_${profileImageFile.name}`;
-      const filePath = path.resolve(process.cwd(), "public/uploads", fileName);
+      const uploaded = await cloudinary.uploader.upload(
+        `data:${newImage.type};base64,${buffer.toString("base64")}`,
+        { folder: "employees" }
+      );
 
-      // Delete old image if exists
-      if (employee.profileImage) {
-        const oldPath = path.resolve(process.cwd(), "public", employee.profileImage.replace(/^\//, ""));
-        if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
-      }
-
-      // Save new image
-      fs.writeFileSync(filePath, buffer);
-      updateData.profileImage = `/uploads/${fileName}`;
+      updateFields.profileImage = uploaded.secure_url;
+      updateFields.profilePublicId = uploaded.public_id;
     }
 
-    // Update user in DB
-    employee.set(updateData);
-    await employee.save({ session });
-
-    await session.commitTransaction();
-    flushProfileCache(userId);
-    session.endSession();
-
-    // Prepare profile image URL
-    const host = req.headers.get("host");
-    const protocol = req.headers.get("x-forwarded-proto") || "http";
-    const profileImageUrl = employee.profileImage
-      ? `${protocol}://${host}${employee.profileImage}?t=${Date.now()}`
-      : null;
+    const updatedUser = await User.findByIdAndUpdate(userId, updateFields, {
+      new: true,
+    });
 
     return NextResponse.json({
       success: true,
-      message: "Profile updated successfully",
-      data: {
-        name: employee.name,
-        profileImage: profileImageUrl,
-      },
+      message: "Profile updated",
+      data: updatedUser,
     });
-  } catch (error) {
-    await session.abortTransaction();
-    session.endSession();
-    console.error("Error updating profile:", error);
+  } catch (err) {
+    console.error("PROFILE UPDATE ERROR:", err);
     return NextResponse.json({ message: "Server Error" }, { status: 500 });
   }
 });

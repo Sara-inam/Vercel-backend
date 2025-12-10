@@ -3,13 +3,11 @@ import User from "../../../models/user.model.js";
 import { cache } from "../../../libs/cache.js";
 import { verifyToken } from "../../../libs/verifyToken.js";
 
-// GET Employee Profile
 const getProfileHandler = async (req, ctx, user) => {
   try {
     const userId = user._id.toString();
     const cacheKey = `profile_${userId}`;
 
-    // Check cache
     const fromCache = cache.get(cacheKey);
     if (fromCache) {
       return NextResponse.json({
@@ -19,7 +17,6 @@ const getProfileHandler = async (req, ctx, user) => {
       });
     }
 
-    // Fetch employee with departments and head info
     const employee = await User.findById(userId).populate({
       path: "departments",
       select: "name head",
@@ -30,16 +27,11 @@ const getProfileHandler = async (req, ctx, user) => {
       return NextResponse.json({ message: "Employee not found" }, { status: 404 });
     }
 
-    const host = req.headers.get("host");
-    const protocol = req.headers.get("x-forwarded-proto") || "http";
-    const imageURL = employee.profileImage
-      ? `${protocol}://${host}${employee.profileImage}`
-      : null;
+    // ⭐ Cloudinary URL already absolute URL
+    const imageURL = employee.profileImage || null;
 
-    // All departments
     const allDepartments = employee.departments.map((d) => d.name);
 
-    // Departments where employee is head
     const headDepartments = employee.departments
       .filter((d) => d.head?._id.toString() === userId)
       .map((d) => d.name);
@@ -63,5 +55,4 @@ const getProfileHandler = async (req, ctx, user) => {
   }
 };
 
-// Export GET with token verification
 export const GET = verifyToken(getProfileHandler);
