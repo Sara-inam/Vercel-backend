@@ -1,0 +1,53 @@
+[2025-12-03 15:06:04] ERROR: MongoDB connection failed: querySrv ENODATA _mongodb._tcp.cluster0.8kw1x3g.mongodb.net
+[2025-12-03 15:10:20] INFO: MongoDB connected: 1
+[2025-12-03 15:57:16] INFO: MongoDB connected: 1
+[2025-12-03 15:57:28] ERROR: Login errors Expected double-quoted property name in JSON at position 92 (line 6 column 1)
+[2025-12-03 16:03:37] INFO: MongoDB connected: 1
+[2025-12-04 18:48:53] INFO: MongoDB connected: 1
+[2025-12-04 19:30:19] INFO: MongoDB connected: 2
+[2025-12-04 19:30:20] INFO: MongoDB connected: 1
+[2025-12-04 19:44:24] INFO: MongoDB connected: 1
+[2025-12-04 19:56:10] INFO: MongoDB connected: 1
+[2025-12-04 20:01:37] INFO: MongoDB connected: 2
+[2025-12-04 20:01:38] INFO: MongoDB connected: 1
+[2025-12-04 20:08:08] INFO: MongoDB connected: 1
+[2025-12-04 20:10:53] INFO: MongoDB connected: 1
+[2025-12-04 20:14:21] INFO: MongoDB connected: 1
+[2025-12-04 20:16:06] INFO: MongoDB connected: 1
+[2025-12-04 20:20:24] INFO: MongoDB connected: 2
+[2025-12-04 20:20:26] INFO: MongoDB connected: 1
+[2025-12-04 20:32:38] INFO: MongoDB connected: 1
+[2025-12-04 21:54:07] INFO: MongoDB connected: 2
+[2025-12-04 21:54:09] INFO: MongoDB connected: 1
+[2025-12-04 22:15:40] INFO: MongoDB connected: 1
+[2025-12-04 22:21:40] INFO: MongoDB connected: 1
+[2025-12-04 22:22:10] INFO: MongoDB connected: 1
+[2025-12-04 22:48:08] ERROR: MongoDB connection failed: queryTxt EREFUSED cluster0.8kw1x3g.mongodb.net
+[2025-12-04 22:48:33] INFO: MongoDB connected: 1
+[2025-12-04 22:56:05] INFO: MongoDB connected: 1
+[2025-12-04 22:59:01] INFO: MongoDB connected: 1
+[2025-12-04 23:04:05] INFO: MongoDB connected: 1
+[2025-12-04 23:09:14] INFO: MongoDB connected: 1
+[2025-12-04 23:17:44] INFO: MongoDB connected: 1
+[2025-12-07 21:50:16] ERROR: Department validation failed: head: Path `head` is required.
+[2025-12-08 15:07:36] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:07:37] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:07:39] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:07:40] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:07:43] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:07:48] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:08:33] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:08:58] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:09:27] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:09:37] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:09:56] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:09:57] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:10:00] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:10:02] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:10:03] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:10:06] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:10:10] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:10:45] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:59:40] ERROR: Login errors Operation `users.findOne()` buffering timed out after 10000ms
+[2025-12-08 15:59:57] ERROR: Login errors Operation `users.findOne()` buffering timed out after 10000ms
+[2025-12-08 15:59:59] ERROR: Login errors aborted

@@ -1,0 +1,25 @@
+[2025-12-03 15:06:04] ERROR: MongoDB connection failed: querySrv ENODATA _mongodb._tcp.cluster0.8kw1x3g.mongodb.net
+[2025-12-03 15:57:28] ERROR: Login errors Expected double-quoted property name in JSON at position 92 (line 6 column 1)
+[2025-12-04 22:48:08] ERROR: MongoDB connection failed: queryTxt EREFUSED cluster0.8kw1x3g.mongodb.net
+[2025-12-07 21:50:16] ERROR: Department validation failed: head: Path `head` is required.
+[2025-12-08 15:07:36] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:07:37] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:07:39] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:07:40] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:07:43] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:07:48] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:08:33] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:08:58] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:09:27] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:09:37] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:09:56] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:09:57] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:10:00] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:10:02] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:10:03] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:10:06] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:10:10] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:10:45] ERROR: Cannot read properties of undefined (reading 'populated')
+[2025-12-08 15:59:40] ERROR: Login errors Operation `users.findOne()` buffering timed out after 10000ms
+[2025-12-08 15:59:57] ERROR: Login errors Operation `users.findOne()` buffering timed out after 10000ms
+[2025-12-08 15:59:59] ERROR: Login errors aborted
