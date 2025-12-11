@@ -1,14 +1,18 @@
 import mongoose from "mongoose";
+import { NextResponse } from "next/server";
 
-export const withDB = (handler) => async (req, res) => {
-  if (!mongoose.connections[0].readyState) {
+export const withDB = (handler) => {
+  return async (req, ctx) => {
     try {
-      await mongoose.connect(process.env.MONGO_URI);
-      console.log("MongoDB connected");
+      if (mongoose.connection.readyState !== 1) {
+        await mongoose.connect(process.env.MONGO_URI);
+      }
+      return handler(req, ctx);
     } catch (err) {
-      console.error("MongoDB connection error:", err);
-      return res.status(500).json({ message: "DB connection failed", error: err.message });
+      return NextResponse.json(
+        { message: "DB Connection Failed", error: err.message },
+        { status: 500 }
+      );
     }
-  }
-  return handler(req, res);
+  };
 };

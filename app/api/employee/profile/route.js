@@ -1,5 +1,5 @@
+import "../../../models/index.js";
 import { NextResponse } from "next/server";
-import User from "../../../models/user.model.js";
 import { cache } from "../../../libs/cache.js";
 import { verifyToken } from "../../../libs/verifyToken.js";
 

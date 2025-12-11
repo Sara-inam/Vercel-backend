@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { cache } from "../../../libs/cache.js";
 import User from "../../../models/user.model.js";
-import Department from "../../../models/department.model.js"; // ⭐ REQUIRED
+import Department from "../../../models/department.model.js"; //  REQUIRED
 import { verifyAdmin } from "../../../libs/verifyAdmin.js";
 
 export const GET = verifyAdmin(async (req) => {
@@ -22,11 +22,11 @@ export const GET = verifyAdmin(async (req) => {
       .select("-password")
       .populate({
         path: "departments",
-        model: Department,      // ⭐ IMPORTANT ON VERCEL
+        model: Department,      //  IMPORTANT ON VERCEL
         select: "name head",
         populate: {
           path: "head",
-          model: User,          // ⭐ Optional but safe
+          model: User,          //  Optional but safe
           select: "email",
         },
       })

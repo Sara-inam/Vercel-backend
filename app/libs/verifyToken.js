@@ -1,6 +1,6 @@
+import "../models/index.js";
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
-import User from "../models/user.model.js";
 import { withDB } from "./withDB.js";
 
 export const verifyToken = (handler) => {
