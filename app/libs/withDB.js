@@ -7,6 +7,10 @@ export const withDB = (handler) => {
       if (mongoose.connection.readyState !== 1) {
         await mongoose.connect(process.env.MONGO_URI);
       }
+
+      // Load all models (register schemas) after DB connect
+      await import("../models/index.js");
+
       return handler(req, ctx);
     } catch (err) {
       return NextResponse.json(
