@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "8601113f-22b5-4562-8a4f-cb4411dda3e6",
+		"name": "Employee_Profile_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49642988",
+		"_collection_link": "https://sarainam60-4047397.postman.co/workspace/5ae923d6-8b88-4dd1-8c64-da66031fa588/collection/49642988-8601113f-22b5-4562-8a4f-cb4411dda3e6?action=share&source=collection_link&creator=49642988"
+	},
+	"item": [
+		{
+			"name": "/api/employee/profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTM2YWFiNjNiOTYxZWIyODdhOGFhNGIiLCJyb2xlIjoiZW1wbG95ZWUiLCJpYXQiOjE3NjUzNjgyNTYsImV4cCI6MTc2NTk3MzA1Nn0.zdKBzcxpDmRdFOKOu19DSETdgWRnQBu5BsfzeG0dpfw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://vercel-backend-d24g.vercel.app/api/employee/profile",
+					"protocol": "https",
+					"host": [
+						"vercel-backend-d24g",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"employee",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/employee/update-profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTM3Y2IxZDQ3MTVmYWJkNGQxZWVjN2EiLCJyb2xlIjoiZW1wbG95ZWUiLCJpYXQiOjE3NjU0Mzc2NjAsImV4cCI6MTc2NjA0MjQ2MH0.CB9mozQjcMmwV-S52ysc0MOcd9WjRGMcijI9WFJUFDw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "sara",
+							"type": "text"
+						},
+						{
+							"key": "profileImage",
+							"type": "file",
+							"src": "/D:/pictures desktop/About2.PNG"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_URL}}/api/employee/update-profile",
+					"host": [
+						"{{base_URL}}"
+					],
+					"path": [
+						"api",
+						"employee",
+						"update-profile"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

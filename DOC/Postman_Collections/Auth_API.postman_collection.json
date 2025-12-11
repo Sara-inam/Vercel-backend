@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "956ae1b8-41b3-40ac-9835-906d34ac0e82",
+		"name": "Auth_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49642988",
+		"_collection_link": "https://sarainam60-4047397.postman.co/workspace/5ae923d6-8b88-4dd1-8c64-da66031fa588/collection/49642988-956ae1b8-41b3-40ac-9835-906d34ac0e82?action=share&source=collection_link&creator=49642988"
+	},
+	"item": [
+		{
+			"name": "/api/auth/login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"1234567\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://vercel-backend-d24g.vercel.app/api/auth/login",
+					"protocol": "https",
+					"host": [
+						"vercel-backend-d24g",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/auth/forget",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"moyocen630@asurad.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://vercel-backend-d24g.vercel.app/api/auth/forget-password",
+					"protocol": "https",
+					"host": [
+						"vercel-backend-d24g",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"auth",
+						"forget-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/auth/reset-password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"1234567\",\r\n    \"confirmPassword\": \"1234567\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/auth/reset-password/9daf80b8a0af43127bc3b9bdfbd5814d22767ec83cc37d2095fa2d435f560cfd",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"reset-password",
+						"9daf80b8a0af43127bc3b9bdfbd5814d22767ec83cc37d2095fa2d435f560cfd"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

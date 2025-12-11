@@ -1,0 +1,397 @@
+{
+	"info": {
+		"_postman_id": "8c384dc3-3a52-4e2c-871d-ae1cc84b85fe",
+		"name": "Employee_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49642988",
+		"_collection_link": "https://sarainam60-4047397.postman.co/workspace/5ae923d6-8b88-4dd1-8c64-da66031fa588/collection/49642988-8c384dc3-3a52-4e2c-871d-ae1cc84b85fe?action=share&source=collection_link&creator=49642988"
+	},
+	"item": [
+		{
+			"name": "/api/employee/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTJmZjhkMGI5ZGUwZDZmYWFjNmQzODgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjUzNTgzOTgsImV4cCI6MTc2NTk2MzE5OH0.aKvfXtS9EZzZIt4VZKhCniMKhK5hQq77oluSPIvfwfI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "zernab",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "zernab@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "employee",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "3456t7",
+							"type": "text"
+						},
+						{
+							"key": "departments[]",
+							"value": "6937eca0b56b22d1c43b5528",
+							"type": "text"
+						},
+						{
+							"key": "profileImage",
+							"type": "file",
+							"src": "/C:/Users/SA/OneDrive/Desktop/sc.PNG"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://vercel-backend-d24g.vercel.app/api/employee/create",
+					"protocol": "https",
+					"host": [
+						"vercel-backend-d24g",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"employee",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/employee/update-employee",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTJmZjhkMGI5ZGUwZDZmYWFjNmQzODgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjUzNjIxODQsImV4cCI6MTc2NTk2Njk4NH0.7YRjVmtKSJHkXI3_CTxBOZA1ZwpCURoFkeGk8eq1Dw8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "employee",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "3456t7",
+							"type": "text"
+						},
+						{
+							"key": "departments[]",
+							"value": "6937eca0b56b22d1c43b5528",
+							"type": "text"
+						},
+						{
+							"key": "profileImage",
+							"type": "file",
+							"src": "/D:/pictures desktop/background.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://vercel-backend-d24g.vercel.app/api/employee/update-employee/693948ca8fb1e7376a2d8d96",
+					"protocol": "https",
+					"host": [
+						"vercel-backend-d24g",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"employee",
+						"update-employee",
+						"693948ca8fb1e7376a2d8d96"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/employee/get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTJmZjhkMGI5ZGUwZDZmYWFjNmQzODgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjUzNjIxODQsImV4cCI6MTc2NTk2Njk4NH0.7YRjVmtKSJHkXI3_CTxBOZA1ZwpCURoFkeGk8eq1Dw8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "employee",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "3456t7",
+							"type": "text"
+						},
+						{
+							"key": "departments[]",
+							"value": "6937eca0b56b22d1c43b5528",
+							"type": "text"
+						},
+						{
+							"key": "profileImage",
+							"type": "file",
+							"src": "/D:/pictures desktop/background.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://vercel-backend-d24g.vercel.app/api/employee/get",
+					"protocol": "https",
+					"host": [
+						"vercel-backend-d24g",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"employee",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/employee/soft-delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTJmZjhkMGI5ZGUwZDZmYWFjNmQzODgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjUzNjIxODQsImV4cCI6MTc2NTk2Njk4NH0.7YRjVmtKSJHkXI3_CTxBOZA1ZwpCURoFkeGk8eq1Dw8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "https://vercel-backend-d24g.vercel.app/api/employee/soft-delete/693948ca8fb1e7376a2d8d96",
+					"protocol": "https",
+					"host": [
+						"vercel-backend-d24g",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"employee",
+						"soft-delete",
+						"693948ca8fb1e7376a2d8d96"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/employee/restore",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTJmZjhkMGI5ZGUwZDZmYWFjNmQzODgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjUzNjIxODQsImV4cCI6MTc2NTk2Njk4NH0.7YRjVmtKSJHkXI3_CTxBOZA1ZwpCURoFkeGk8eq1Dw8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "https://vercel-backend-d24g.vercel.app/api/employee/restore/693948ca8fb1e7376a2d8d96",
+					"protocol": "https",
+					"host": [
+						"vercel-backend-d24g",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"employee",
+						"restore",
+						"693948ca8fb1e7376a2d8d96"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/employee/delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTJmZjhkMGI5ZGUwZDZmYWFjNmQzODgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjUzNjIxODQsImV4cCI6MTc2NTk2Njk4NH0.7YRjVmtKSJHkXI3_CTxBOZA1ZwpCURoFkeGk8eq1Dw8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://vercel-backend-d24g.vercel.app/api/employee/delete/693948ca8fb1e7376a2d8d96",
+					"protocol": "https",
+					"host": [
+						"vercel-backend-d24g",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"employee",
+						"delete",
+						"693948ca8fb1e7376a2d8d96"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/employee/total",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTJmZjhkMGI5ZGUwZDZmYWFjNmQzODgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjUzNjIxODQsImV4cCI6MTc2NTk2Njk4NH0.7YRjVmtKSJHkXI3_CTxBOZA1ZwpCURoFkeGk8eq1Dw8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://vercel-backend-d24g.vercel.app/api/employee/total",
+					"protocol": "https",
+					"host": [
+						"vercel-backend-d24g",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"employee",
+						"total"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/employee/search",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTJmZjhkMGI5ZGUwZDZmYWFjNmQzODgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjUzNjIxODQsImV4cCI6MTc2NTk2Njk4NH0.7YRjVmtKSJHkXI3_CTxBOZA1ZwpCURoFkeGk8eq1Dw8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_URL}}/api/employee/search?q=a",
+					"host": [
+						"{{base_URL}}"
+					],
+					"path": [
+						"api",
+						"employee",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "a"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

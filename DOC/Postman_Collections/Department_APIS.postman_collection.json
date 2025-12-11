@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "c50e27ac-d32c-48af-8219-e8d6f533d936",
+		"name": "Department_APIS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49642988",
+		"_collection_link": "https://sarainam60-4047397.postman.co/workspace/5ae923d6-8b88-4dd1-8c64-da66031fa588/collection/49642988-c50e27ac-d32c-48af-8219-e8d6f533d936?action=share&source=collection_link&creator=49642988"
+	},
+	"item": [
+		{
+			"name": "/api/department/get",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTJmZjhkMGI5ZGUwZDZmYWFjNmQzODgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjU0MzA4MjYsImV4cCI6MTc2NjAzNTYyNn0.IqomJrF5FRcQStVXJ3EwKH4DD5yrDgktiReP6JBql-w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/department/get",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"department",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/department/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTJmZjhkMGI5ZGUwZDZmYWFjNmQzODgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjU0MzA4MjYsImV4cCI6MTc2NjAzNTYyNn0.IqomJrF5FRcQStVXJ3EwKH4DD5yrDgktiReP6JBql-w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Developer\",\r\n    \"discription\": \"best\",\r\n    \"head\": \"69394483cc93b18477a26fb1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/department/create",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"department",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/department/update-department",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTJmZjhkMGI5ZGUwZDZmYWFjNmQzODgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjU0MzA4MjYsImV4cCI6MTc2NjAzNTYyNn0.IqomJrF5FRcQStVXJ3EwKH4DD5yrDgktiReP6JBql-w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"JAN\",\r\n    \"discription\": \"best\",\r\n    \"head\": \"69394483cc93b18477a26fb1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/department/update-department/693a5751b00189c36fb6d089",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"department",
+						"update-department",
+						"693a5751b00189c36fb6d089"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/department/delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTJmZjhkMGI5ZGUwZDZmYWFjNmQzODgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjU0MzA4MjYsImV4cCI6MTc2NjAzNTYyNn0.IqomJrF5FRcQStVXJ3EwKH4DD5yrDgktiReP6JBql-w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"JAN\",\r\n    \"discription\": \"best\",\r\n    \"head\": \"69394483cc93b18477a26fb1\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/department/delete/693a5751b00189c36fb6d089",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"department",
+						"delete",
+						"693a5751b00189c36fb6d089"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
