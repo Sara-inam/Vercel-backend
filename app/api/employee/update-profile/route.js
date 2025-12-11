@@ -13,19 +13,26 @@ export const runtime = "nodejs";
 
 export const PUT = verifyToken(async (req, ctx, user) => {
   try {
+    const contentType = req.headers.get("content-type") || "";
+
     let name = null;
     let newImage = null;
 
-    // Check if request is multipart/form-data
-    if (req.headers.get("content-type")?.includes("multipart/form-data")) {
+    if (contentType.includes("multipart/form-data")) {
+      // FormData request
       const formData = await req.formData();
       name = formData.get("name");
       newImage = formData.get("profileImage");
-    } else {
-      // Fallback for JSON request
-      const body = await req.json();
+    } else if (contentType.includes("application/json")) {
+      // JSON request
+      const body = await req.json().catch(() => ({})); // prevent crash if empty
       name = body.name;
-      newImage = body.profileImage; // Base64 string if any
+      newImage = body.profileImage || null; // base64 string
+    } else {
+      return NextResponse.json(
+        { message: "Unsupported Content-Type" },
+        { status: 400 }
+      );
     }
 
     const userId = user._id;
@@ -35,39 +42,34 @@ export const PUT = verifyToken(async (req, ctx, user) => {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
-    let updateFields = {};
+    const updateFields = {};
     if (name) updateFields.name = name;
 
-    // DELETE OLD IMAGE
-    if (employee.profilePublicId && newImage) {
-      await cloudinary.uploader.destroy(employee.profilePublicId);
-    }
+    if (newImage) {
+      // DELETE old image if exists
+      if (employee.profilePublicId) {
+        await cloudinary.uploader.destroy(employee.profilePublicId);
+      }
 
-    // UPLOAD NEW IMAGE if present and it's file (multipart)
-    if (newImage && newImage.size > 0) {
-      const arrayBuffer = await newImage.arrayBuffer();
-      const buffer = Buffer.from(arrayBuffer);
+      let uploaded;
+      if (newImage instanceof File) {
+        // multipart file
+        const arrayBuffer = await newImage.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+        uploaded = await cloudinary.uploader.upload(
+          `data:${newImage.type};base64,${buffer.toString("base64")}`,
+          { folder: "employees" }
+        );
+      } else if (typeof newImage === "string") {
+        // base64 string from JSON
+        uploaded = await cloudinary.uploader.upload(newImage, { folder: "employees" });
+      }
 
-      const uploaded = await cloudinary.uploader.upload(
-        `data:${newImage.type};base64,${buffer.toString("base64")}`,
-        { folder: "employees" }
-      );
-
-      updateFields.profileImage = uploaded.secure_url;
-      updateFields.profilePublicId = uploaded.public_id;
-    } else if (typeof newImage === "string") {
-      // If newImage is base64 from JSON, upload it
-      const uploaded = await cloudinary.uploader.upload(
-        newImage,
-        { folder: "employees" }
-      );
       updateFields.profileImage = uploaded.secure_url;
       updateFields.profilePublicId = uploaded.public_id;
     }
 
-    const updatedUser = await User.findByIdAndUpdate(userId, updateFields, {
-      new: true,
-    });
+    const updatedUser = await User.findByIdAndUpdate(userId, updateFields, { new: true });
 
     return NextResponse.json({
       success: true,
