@@ -2,6 +2,7 @@ import { withDB } from "./withDB.js";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
+import User from "../models/user.model.js";
 
 export const verifyToken = (handler) => {
   return withDB(async (req, ctx) => {
@@ -16,8 +17,8 @@ export const verifyToken = (handler) => {
 
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-      // ✅ Fetch User model dynamically after DB connect
-      const User = mongoose.models.User;
+      // Fetch User model dynamically after DB connect
+      // const User = mongoose.models.User;
 
       if (!User) 
         return NextResponse.json({ message: "User model not found" }, { status: 500 });

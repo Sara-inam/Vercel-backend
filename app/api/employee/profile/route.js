@@ -1,11 +1,8 @@
 import { NextResponse } from "next/server";
 import { cache } from "../../../libs/cache.js";
 import { verifyToken } from "../../../libs/verifyToken.js";
-import mongoose from "mongoose";
-
-// Dynamic fetch of models
-const User = () => mongoose.model("User");
-const Department = () => mongoose.model("Department");
+import User from "../../../models/user.model.js";
+import Department from "../../../models/department.model.js";
 
 const getProfileHandler = async (req, ctx, user) => {
   const userId = user._id.toString();
@@ -14,7 +11,7 @@ const getProfileHandler = async (req, ctx, user) => {
   const fromCache = cache.get(cacheKey);
   if (fromCache) return NextResponse.json({ success: true, data: fromCache, cached: true });
 
-  const employee = await User().findById(userId).populate({
+  const employee = await User.findById(userId).populate({
     path: "departments",
     select: "name head",
     populate: { path: "head", select: "_id name" },

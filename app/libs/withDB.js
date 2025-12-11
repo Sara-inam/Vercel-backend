@@ -9,7 +9,8 @@ export const withDB = (handler) => {
       }
 
       // Load all models (register schemas) after DB connect
-      await import("../models/index.js");
+      await import("../models/user.model.js");
+      await import("../models/department.model.js");
 
       return handler(req, ctx);
     } catch (err) {
