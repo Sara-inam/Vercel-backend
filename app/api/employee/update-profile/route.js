@@ -13,9 +13,20 @@ export const runtime = "nodejs";
 
 export const PUT = verifyToken(async (req, ctx, user) => {
   try {
-    const formData = await req.formData();
-    const name = formData.get("name");
-    const newImage = formData.get("profileImage");
+    let name = null;
+    let newImage = null;
+
+    // Check if request is multipart/form-data
+    if (req.headers.get("content-type")?.includes("multipart/form-data")) {
+      const formData = await req.formData();
+      name = formData.get("name");
+      newImage = formData.get("profileImage");
+    } else {
+      // Fallback for JSON request
+      const body = await req.json();
+      name = body.name;
+      newImage = body.profileImage; // Base64 string if any
+    }
 
     const userId = user._id;
     const employee = await User.findById(userId);
@@ -28,11 +39,11 @@ export const PUT = verifyToken(async (req, ctx, user) => {
     if (name) updateFields.name = name;
 
     // DELETE OLD IMAGE
-    if (employee.profilePublicId) {
+    if (employee.profilePublicId && newImage) {
       await cloudinary.uploader.destroy(employee.profilePublicId);
     }
 
-    // UPLOAD NEW IMAGE
+    // UPLOAD NEW IMAGE if present and it's file (multipart)
     if (newImage && newImage.size > 0) {
       const arrayBuffer = await newImage.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
@@ -42,6 +53,14 @@ export const PUT = verifyToken(async (req, ctx, user) => {
         { folder: "employees" }
       );
 
+      updateFields.profileImage = uploaded.secure_url;
+      updateFields.profilePublicId = uploaded.public_id;
+    } else if (typeof newImage === "string") {
+      // If newImage is base64 from JSON, upload it
+      const uploaded = await cloudinary.uploader.upload(
+        newImage,
+        { folder: "employees" }
+      );
       updateFields.profileImage = uploaded.secure_url;
       updateFields.profilePublicId = uploaded.public_id;
     }
