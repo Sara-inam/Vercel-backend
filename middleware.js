@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export function middleware(req) {
   const response = NextResponse.next();
 
-  const allowedOrigin = "https://vercel-frontent-jhuf5kuiv-sarainam60-gmailcoms-projects.vercel.app";
+  const allowedOrigin = "https://vercel-frontent-three.vercel.app";
 
   response.headers.set("Access-Control-Allow-Origin", allowedOrigin);
   response.headers.set("Access-Control-Allow-Credentials", "true");
