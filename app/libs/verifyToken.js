@@ -29,6 +29,8 @@ export const verifyToken = (handler) => {
           { status: 401 }
         );
       }
+      console.log("TOKEN ENV:", decoded.env);
+console.log("SERVER ENV:", process.env.ENV_NAME);
 
       const user = await User.findById(decoded.userId);
       if (!user)
