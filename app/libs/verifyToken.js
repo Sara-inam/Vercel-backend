@@ -7,51 +7,27 @@ export const verifyToken = (handler) => {
   return withDB(async (req, ctx) => {
     try {
       const authHeader = req.headers.get("authorization");
-      if (!authHeader) {
-        return NextResponse.json(
-          { message: "No token provided" },
-          { status: 401 }
-        );
-      }
+      if (!authHeader) return NextResponse.json({ message: "No token provided" }, { status: 401 });
 
-      const token = authHeader.split(" ")[1];
-      if (!token) {
-        return NextResponse.json(
-          { message: "No token provided" },
-          { status: 401 }
-        );
-      }
+      const token = authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : authHeader;
+      if (!token) return NextResponse.json({ message: "Token is empty" }, { status: 401 });
 
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-      if (!decoded.env) {
-        return NextResponse.json(
-          { message: "Token environment missing" },
-          { status: 401 }
-        );
-      }
-
+      if (!decoded.env) return NextResponse.json({ message: "Token environment missing" }, { status: 401 });
       if (decoded.env !== process.env.ENV_NAME) {
         return NextResponse.json(
-          { message: "Token environment mismatch" },
+          { message: `Token env ${decoded.env} does not match server env ${process.env.ENV_NAME}` },
           { status: 401 }
         );
       }
 
       const user = await User.findById(decoded.userId);
-      if (!user) {
-        return NextResponse.json(
-          { message: "User not found" },
-          { status: 404 }
-        );
-      }
+      if (!user) return NextResponse.json({ message: "User not found" }, { status: 404 });
 
       return handler(req, ctx, user);
+
     } catch (err) {
-      return NextResponse.json(
-        { message: err.message || "Unauthorized" },
-        { status: 401 }
-      );
+      return NextResponse.json({ message: err.message || "Unauthorized" }, { status: 401 });
     }
   });
 };
