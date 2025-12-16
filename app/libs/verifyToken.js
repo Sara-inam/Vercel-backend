@@ -15,12 +15,12 @@ export const verifyToken = (handler) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
       //  ENVIRONMENT CHECK (MAIN FIX)
-      if (decoded.env !== process.env.ENV_NAME) {
-        return NextResponse.json(
-          { message: "Token environment mismatch" },
-          { status: 401 }
-        );
-      }
+         if (decoded.env !== process.env.ENV_NAME) {
+  return NextResponse.json(
+    { message: `Token env ${decoded.env} does not match server env ${process.env.ENV_NAME}` },
+    { status: 401 }
+  );
+}
       console.log("TOKEN ENV:", decoded.env);
 console.log("SERVER ENV:", process.env.ENV_NAME);
 
