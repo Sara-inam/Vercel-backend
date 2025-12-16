@@ -13,13 +13,16 @@ export const verifyToken = (handler) => {
       if (!token) return NextResponse.json({ message: "Token is empty" }, { status: 401 });
 
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      if (!decoded.env) return NextResponse.json({ message: "Token environment missing" }, { status: 401 });
+
+      //  ENVIRONMENT CHECK (MAIN FIX)
       if (decoded.env !== process.env.ENV_NAME) {
         return NextResponse.json(
-          { message: `Token env ${decoded.env} does not match server env ${process.env.ENV_NAME}` },
+          { message: "Token environment mismatch" },
           { status: 401 }
         );
       }
+      console.log("TOKEN ENV:", decoded.env);
+console.log("SERVER ENV:", process.env.ENV_NAME);
 
       const user = await User.findById(decoded.userId);
       if (!user) return NextResponse.json({ message: "User not found" }, { status: 404 });
